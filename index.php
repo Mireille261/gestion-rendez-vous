@@ -13,9 +13,11 @@ try {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+   
     <meta charset="UTF-8">
     <title>Liste des Rendez-vous</title>
     <style>
+         <link rel="stylesheet" href="css/style.css">
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #f4f4f4; }
