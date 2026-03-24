@@ -5,14 +5,12 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     try {
-        $sql = "DELETE FROM rendezvous WHERE id = :id";
+        $sql = "DELETE FROM rendez_vous WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([':id' => $id]);
 
-        header("Location: index.php?statut=supprime");
+        header("Location: traitement.php");
         exit();
-    } catch (PDOException $e) {
-        die("Erreur de suppression : " . $e->getMessage());
-    }
+   
 }
 ?>

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -55,11 +55,8 @@
             </div>
         </div>
     </div>
-=======
 <?php
 require_once 'db.php';
-
-// On récupère tous les rendez-vous
 $query = $pdo->query("SELECT * FROM rendezvous ORDER BY date DESC");
 $rdvList = $query->fetchAll();
 ?>
@@ -99,6 +96,5 @@ $rdvList = $query->fetchAll();
 
     <br>
     <a href="formulaire.php">Ajouter un nouveau rendez-vous</a>
->>>>>>> origin/feature/backend-logic
 </body>
 </html>
