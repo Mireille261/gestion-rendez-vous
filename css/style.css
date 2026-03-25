@@ -1,0 +1,24 @@
+/* Style personnalisé pour renforcer l'aspect médical */
+body {
+    background-color: #f0f4f8 !important; /* Un bleu-gris très doux */
+}
+.card {
+    border-radius: 15px; /* Bords arrondis pour plus de modernité */
+    border: none;
+}
+
+.card-header {
+    background-color: #004a99 !important; /* Bleu foncé sérieux */
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    font-weight: 600;
+    padding: 12px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
