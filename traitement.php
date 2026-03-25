@@ -15,29 +15,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom'])) {
     ]);
 }
 
-$query = $pdo->query("SELECT * FROM rendez_vous ORDER BY date_rdv ASC");
-$tous_les_rdv = $query->fetchAll();
+// Récupérer le paramètre de recherche
+$recherche = isset($_GET['recherche']) ? htmlspecialchars($_GET['recherche']) : '';
+
+// Requête SQL avec filtre optionnel
+if (!empty($recherche)) {
+    $sql = "SELECT * FROM rendez_vous WHERE LOWER(nom) LIKE LOWER(:recherche) ORDER BY date_rdv ASC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':recherche' => '%' . $recherche . '%']);
+    $tous_les_rdv = $stmt->fetchAll();
+} else {
+    $query = $pdo->query("SELECT * FROM rendez_vous ORDER BY date_rdv ASC");
+    $tous_les_rdv = $query->fetchAll();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <title>Liste Officielle des RDV</title>
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-5">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info" href="#">
+                <i class="bi bi-hospital me-2"></i>Soin-Rdv
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white-50" href="index.php">Nouveau RDV</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold" href="traitement.php">Liste des Patients</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-primary">Liste des Patients</h2>
             <div class="row mb-3">
     <div class="row mb-4">
-    <div class="col-md-6">
-        <div class="input-group input-group-lg"> <span class="input-group-text bg-primary text-white">
+    <div class="col-md-12">
+        <form method="GET" action="traitement.php" class="input-group input-group-lg">
+            <span class="input-group-text bg-primary text-white">
                 <i class="bi bi-search">🔍</i> 
             </span>
-            <input type="text" id="rechercheNom" class="form-control" placeholder="Rechercher un patient par nom...">
-        </div>
+            <input type="text" name="recherche" class="form-control" placeholder="Rechercher un patient par nom..." value="<?php echo htmlspecialchars($recherche); ?>">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+        </form>
     </div>
 </div>
 </div>
@@ -47,7 +75,6 @@ $tous_les_rdv = $query->fetchAll();
         <div class="card shadow border-0">
             <div class="card-body p-0">
                 <table class="table table-hover mb-0">
-                    <table class="table table-hover mb-0">
     <thead class="table-primary">
         <tr>
             <th>#</th>
@@ -81,23 +108,19 @@ $tous_les_rdv = $query->fetchAll();
 </table>
             </div>
         </div>
-    </div>
-    <script>
-document.getElementById('rechercheNom').addEventListener('keyup', function() {
-    let filtre = this.value.toLowerCase();
-    let lignes = document.querySelectorAll('tbody tr');
+</main>
 
-    lignes.forEach(ligne => {
-        // On récupère le texte de la deuxième colonne (le Nom)
-        let nom = ligne.cells[1].textContent.toLowerCase();
-        
-        if (nom.includes(filtre)) {
-            ligne.style.display = ""; // On affiche
-        } else {
-            ligne.style.display = "none"; // On cache
-        }
-    });
-});
-</script>
+<footer class="bg-white border-top py-4 mt-5">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 text-md-start text-muted">
+                <small>&copy; 2026 <strong>Soin-Rdv</strong>. Tous droits réservés.</small>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <span class="badge bg-info-subtle text-info px-3 py-2">Projet Gestion-Rendez-vous</span>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
