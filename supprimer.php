@@ -9,6 +9,7 @@ if (isset($_GET['id'])) {
         // On prépare la suppression sécurisée
         $sql = "DELETE FROM rendez_vous WHERE id = :id";
         $stmt = $pdo->prepare($sql);
+        
         $stmt->execute([':id' => $id]);
         
         // Si ça marche, on retourne à la liste

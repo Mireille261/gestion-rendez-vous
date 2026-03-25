@@ -1,24 +1,13 @@
-/* Style personnalisé pour renforcer l'aspect médical */
 body {
-    background-color: #f0f4f8 !important; /* Un bleu-gris très doux */
-}
-.card {
-    border-radius: 15px; /* Bords arrondis pour plus de modernité */
-    border: none;
+    background-color: #e3f2fd; /* Un bleu très clair pour tester */
+    font-family: Arial, sans-serif;
 }
 
-.card-header {
-    background-color: #004a99 !important; /* Bleu foncé sérieux */
-    border-radius: 15px 15px 0 0 !important;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    font-weight: 600;
-    padding: 12px;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 50px auto;
 }
