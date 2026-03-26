@@ -87,7 +87,7 @@ if (!empty($recherche)) {
     </thead>
    <tbody>
     <?php 
-    $i = 1; // On initialise le compteur à 1
+    $i = 1;
     foreach ($tous_les_rdv as $rdv): 
     ?>
     <tr>
@@ -98,10 +98,8 @@ if (!empty($recherche)) {
         <td><?php echo $rdv['heure_rdv']; ?></td>
         <td>
     <?php 
-    // On récupère le motif (et on gère si c'est vide pour éviter l'erreur)
     $m = $rdv['motif'] ?? 'Non défini'; 
     
-    // On choisit la couleur
     $color = "bg-secondary"; // Gris par défaut
     if($m == "Urgence") $color = "bg-danger"; // Rouge
     if($m == "Suivi") $color = "bg-success"; // Vert
