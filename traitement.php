@@ -81,6 +81,7 @@ if (!empty($recherche)) {
             <th>Nom du Patient</th>
             <th>Date</th>
             <th>Heure</th>
+            <th>Motif</th>
             <th class="text-center">Actions</th>
         </tr>
     </thead>
@@ -95,6 +96,23 @@ if (!empty($recherche)) {
         <td class="fw-bold"><?php echo htmlspecialchars($rdv['nom']); ?></td>
         <td><?php echo $rdv['date_rdv']; ?></td>
         <td><?php echo $rdv['heure_rdv']; ?></td>
+        <td>
+    <?php 
+    // On récupère le motif (et on gère si c'est vide pour éviter l'erreur)
+    $m = $rdv['motif'] ?? 'Non défini'; 
+    
+    // On choisit la couleur
+    $color = "bg-secondary"; // Gris par défaut
+    if($m == "Urgence") $color = "bg-danger"; // Rouge
+    if($m == "Suivi") $color = "bg-success"; // Vert
+    if($m == "Examen") $color = "bg-primary"; // Bleu
+    if($m == "Consultation") $color = "bg-info text-dark"; // Bleu clair
+    ?>
+    
+    <span class="badge <?php echo $color; ?>">
+        <?php echo $m; ?>
+    </span>
+</td>
         <td class="text-center">
             <a href="modifier.php?id=<?php echo $rdv['id']; ?>" class="btn btn-sm btn-warning">Modifier</a>
             <a href="supprimer.php?id=<?php echo $rdv['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ?')">Supprimer</a>
