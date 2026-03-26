@@ -1,5 +1,5 @@
 <?php
-require_once 'db_config.php';
+require_once 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];

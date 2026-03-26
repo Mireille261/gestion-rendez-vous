@@ -53,6 +53,17 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="motif" class="form-label fw-bold">Motif du rendez-vous</label>
+                            <select name="motif" id="motif" class="form-select" required>
+                                <option value="">-- Sélectionnez un motif --</option>
+                                <option value="Consultation">Consultation</option>
+                                <option value="Urgence">Urgence</option>
+                                <option value="Examen">Examen</option>
+                                <option value="Suivi">Suivi</option>
+                            </select>
+                        </div>
+
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" name="valider" class="btn btn-primary btn-lg">
                                 <i class="bi bi-check-circle me-2"></i>Enregistrer le rendez-vous
