@@ -20,7 +20,7 @@ $recherche = isset($_GET['recherche']) ? htmlspecialchars($_GET['recherche']) : 
 
 // Requête SQL avec filtre optionnel
 if (!empty($recherche)) {
-    $sql = "SELECT * FROM rendez_vous WHERE LOWER(nom) LIKE LOWER(:recherche) ORDER BY date_rdv ASC";
+    $sql = "SELECT * FROM rendez_vous WHERE LOWER(nom) LIKE LOWER(:recherche) OR LOWER(motif) LIKE LOWER(:recherche) ORDER BY date_rdv ASC";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':recherche' => '%' . $recherche . '%']);
     $tous_les_rdv = $stmt->fetchAll();
