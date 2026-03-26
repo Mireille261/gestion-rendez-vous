@@ -12,10 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
     $date = $_POST['date_rdv'];
     $heure = $_POST['heure_rdv'];
+    $motif = $_POST['motif'];
 
-    $sql = "UPDATE rendez_vous SET nom = ?, date_rdv = ?, heure_rdv = ? WHERE id = ?";
+    $sql = "UPDATE rendez_vous SET nom = ?, date_rdv = ?, heure_rdv = ?, motif = ? WHERE id = ?";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$nom, $date, $heure, $id]);
+    $stmt->execute([$nom, $date, $heure, $motif, $id]);
     header("Location: traitement.php");
 }
 ?>
@@ -46,6 +47,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="mb-3">
                         <label class="form-label fw-bold">Heure</label>
                         <input type="time" class="form-control" name="heure_rdv" value="<?php echo $rdv['heure_rdv']; ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Motif du rendez-vous</label>
+                        <select name="motif" class="form-select" required>
+                            <option value="Consultation" <?php echo ($rdv['motif'] == 'Consultation') ? 'selected' : ''; ?>>Consultation</option>
+                            <option value="Urgence" <?php echo ($rdv['motif'] == 'Urgence') ? 'selected' : ''; ?>>Urgence</option>
+                            <option value="Examen" <?php echo ($rdv['motif'] == 'Examen') ? 'selected' : ''; ?>>Examen</option>
+                            <option value="Suivi" <?php echo ($rdv['motif'] == 'Suivi') ? 'selected' : ''; ?>>Suivi</option>
+                        </select>
                     </div>
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-warning fw-bold">Enregistrer les modifications</button>
